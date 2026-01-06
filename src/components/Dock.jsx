@@ -7,7 +7,13 @@ import { Tooltip } from 'react-tooltip';
 
 const Dock = () => {
 
-  const {openWindow,closeWindow,focuseWindow} = useWindowStore
+  // ✅ MUST CALL THE STORE
+  const {
+    openWindow,
+    closeWindow,
+    focuseWindow,
+    windows, // 👈 YOU NEED THIS
+  } = useWindowStore();
 
   const dockRef = React.useRef(null);
 
@@ -46,7 +52,7 @@ const Dock = () => {
           scale: 1,
           y: 0,
           duration: 0.3,
-          ease: 'power1.out', // 🔥 FIXED
+          ease: 'power1.out',
         }),
       );
     };
@@ -60,15 +66,19 @@ const Dock = () => {
     };
   }, []);
 
+  // ✅ FIXED LOGIC
   const toggleApp = (app) => {
-    // if(!app.canOpen) return;
-    const window = window[app.id]
-    if(window.isOpen){
-      closeWindow(app.id)
-    }else{
-      openWindow(app.id)
-    }
+    if (!app.canOpen) return;
 
+    const win = windows?.[app.id];
+    if (!win) return;
+
+    if (win.isOpen) {
+      closeWindow(app.id);
+    } else {
+      openWindow(app.id);
+      focuseWindow(app.id);
+    }
   };
 
   return (
@@ -84,9 +94,7 @@ const Dock = () => {
               data-tooltip-content={name}
               data-tooltip-delay-show={150}
               disabled={!canOpen}
-              onClick={() => {
-                toggleApp({ id, canOpen });
-              }}
+              onClick={() => toggleApp({ id, canOpen })}
             >
               <img
                 src={`/images/${icon}`}

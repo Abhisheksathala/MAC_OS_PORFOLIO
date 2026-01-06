@@ -1,12 +1,24 @@
 import React from 'react';
-import { NavBar, Wellcome,Dock } from '#components';
+import { Draggable } from 'gsap/Draggable';
+import gsap from 'gsap';
+//# imports
+import { NavBar, Wellcome, Dock } from '#components';
+import { TerminalWindow, SafariWindow ,ResumeWindow} from '#windows';
+
+gsap.registerPlugin(Draggable);
 
 const App = () => {
+
+
   return (
     <div>
       <NavBar />
       <Wellcome />
       <Dock />
+
+      <TerminalWindow />
+      <SafariWindow />
+      <ResumeWindow />
     </div>
   );
 };
