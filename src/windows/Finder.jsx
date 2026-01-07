@@ -6,6 +6,7 @@ import { locations } from '#constants';
 
 import useLocationStore from '#store/location';
 import clsx from 'clsx';
+import useWindowStore from '#store/window';
 
 const RenderList = ({ items, activeLocation, onSelect }) => {
   return (
@@ -29,15 +30,20 @@ const RenderList = ({ items, activeLocation, onSelect }) => {
 };
 
 const Finder = () => {
+  const { openWindow } = useWindowStore();
+
   const { activeLocation, setActiveLocation, resetActiveLocation } = useLocationStore();
 
   // console.log(Object.values(locations))
 
-  const openItem = (item)=>{
-    <li>
+  const openItem = (item) => {
+    if (item.fileType === 'pdf') return openWindow('resume');
+    if (item.kind === 'folder') return setActiveLocation(item);
+    if (['fig', 'url'].includes(item.fileType) && item.href) return window.open(item.href, 'blank');
 
-    </li>
-  }
+    openWindow(`${item.fileType}${item.kind}`,item)
+
+  };
 
   return (
     <>
@@ -69,14 +75,23 @@ const Finder = () => {
             />
           </div>
         </div>
+        <ul className="content">
+          {activeLocation?.children.map((item) => (
+            <>
+              <li
+                key={item.id}
+                className={item.position}
+                onClick={() => {
+                  openItem(item);
+                }}
+              >
+                <img src={item.icon} alt={item.name} />
+                <p>{item.name}</p>
+              </li>
+            </>
+          ))}
+        </ul>
       </div>
-      <ul className="content">
-        {activeLocation?.children.map((item) => (
-          <>
-            <li key={item.id} className={item.postion} onClick={()=>{openItem(item)}}></li>
-          </>
-        ))}
-      </ul>
     </>
   );
 };
