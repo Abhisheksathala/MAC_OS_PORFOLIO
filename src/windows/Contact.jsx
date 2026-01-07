@@ -12,7 +12,6 @@ const Contact = () => {
 
   if (!data) return null;
 
-  const { name, imageUrl } = data;
 
   return (
     <>

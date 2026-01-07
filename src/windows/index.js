@@ -5,6 +5,7 @@ import Finderwindow from "./Finder";
 import TextWindow from "./Text";
 import ImageWindow from "./Image";
 import ContactWindow from "./Contact";
+import GalleryWindow from "./Gallery";
 
 export {
   TerminalWindow,
@@ -13,5 +14,6 @@ export {
   Finderwindow,
   TextWindow,
   ImageWindow,
-  ContactWindow
+  ContactWindow,
+  GalleryWindow
 }
