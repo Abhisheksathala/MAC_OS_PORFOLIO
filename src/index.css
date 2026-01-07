@@ -7,7 +7,8 @@ body {
   width: 100dvw;
   overflow: hidden;
   height: 100dvh;
-  background-image: url("/images/wallpaper.png");
+  /* /images/wallpaper.png */
+  background-image: url("https://4kwallpapers.com/images/walls/thumbs_2t/24778.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
