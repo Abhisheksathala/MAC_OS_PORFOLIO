@@ -7,12 +7,12 @@ import { Tooltip } from 'react-tooltip';
 
 const Dock = () => {
 
-  // ✅ MUST CALL THE STORE
+
   const {
     openWindow,
     closeWindow,
     focuseWindow,
-    windows, // 👈 YOU NEED THIS
+    windows,
   } = useWindowStore();
 
   const dockRef = React.useRef(null);
@@ -66,7 +66,7 @@ const Dock = () => {
     };
   }, []);
 
-  // ✅ FIXED LOGIC
+
   const toggleApp = (app) => {
     if (!app.canOpen) return;
 
