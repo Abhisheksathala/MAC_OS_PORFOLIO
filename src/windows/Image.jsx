@@ -1,0 +1,40 @@
+import React from 'react';
+import WindowWrapper from '#hoc/WindowWrapper.jsx';
+import WindowControls from '#components/WindowControlls';
+import { Search } from 'lucide-react';
+import useWindowStore from '#store/window';
+
+
+const Image = () => {
+
+    const { windows } = useWindowStore();
+
+  const data = windows?.imgfile?.data || {};
+
+  if(!data) return null;
+
+  const {name,imageUrl} = data;
+
+  return (
+    <>
+    <div id="window-header">
+      <WindowControls target={"imgfile"}/>
+      <h2>{name}</h2>
+    </div>
+
+    <div className="p-5 bg-white">
+      {
+        imageUrl ? <>
+        <div className="w-full">
+          <img src={imageUrl} alt={name} className='w-full h-auto mx-h-[70vh] object-contain rounded'/>
+        </div>
+        </> : <></>
+      }
+    </div>
+    </>
+  )
+}
+
+const ImageWindow = WindowWrapper(Image,"imgfile")
+
+export default ImageWindow
