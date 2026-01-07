@@ -76,7 +76,7 @@ const Wellcome = () => {
         {renderText("Where code meets motion.", 'text-3xl font-georama', 100)}
       </p>
 
-      <h1 ref={titleRef}>{renderText('Abhishek', 'text-9xl italic font-georama', 400)}</h1>
+      <h1 ref={titleRef}>{renderText('Abhishek', 'text-9xl  italic font-georama', 400)}</h1>
 
       <div className="small-screen">
         <p>This Portfolio is designed for desktop/tablet screen only.</p>
